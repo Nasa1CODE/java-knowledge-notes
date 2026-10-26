@@ -24,7 +24,7 @@
 - [x] [[Garbage-Collection]] — Vòng đời Object (Eden, Survivor, Old Gen), Stop-The-World, thực hành mô phỏng Memory Leak & giám sát bằng Grafana + Prometheus.
 
 ### Tuần 3: Concurrency & Java 21+ Modern Features
-- [ ] [[Virtual-Threads]] — Project Loom, khác biệt giữa Platform Thread (OS) và Virtual Thread, khi nào nên/không nên dùng.
+- [x] [[03-Concurrency/Virtual-Threads|Virtual-Threads]] — Project Loom, Platform Thread vs Virtual Thread, Race Condition, AtomicInteger, Stateless design.
 - [ ] [[Locks-and-Synchronized]] — `synchronized`, `ReentrantLock`, CAS (Atomic variables), hiện tượng Race condition.
 - [ ] [[CompletableFuture]] — Lập trình bất đồng bộ không chặn (Non-blocking).
 
