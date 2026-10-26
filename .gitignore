@@ -1,0 +1,13 @@
+# Obsidian workspace cache (không cần track)
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+
+# Demo compiled files
+demo/*.class
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# File lỗi encoding
+Kh*ni?m*.md
