@@ -25,7 +25,7 @@
 
 ### Tuần 3: Concurrency & Java 21+ Modern Features
 - [x] [[03-Concurrency/Virtual-Threads|Virtual-Threads]] — Project Loom, Platform Thread vs Virtual Thread, Race Condition, AtomicInteger, Stateless design.
-- [ ] [[Locks-and-Synchronized]] — `synchronized`, `ReentrantLock`, CAS (Atomic variables), hiện tượng Race condition.
+- [x] [[03-Concurrency/Locks-and-Synchronized|Locks-and-Synchronized]] — Race Condition thực tế (BankAccount), synchronized method/block, ReentrantLock, ReadWriteLock, Deadlock.
 - [ ] [[CompletableFuture]] — Lập trình bất đồng bộ không chặn (Non-blocking).
 
 ### Tuần 4 - 5: Hibernate & Database Deep-dive (Trọng tâm Backend)
