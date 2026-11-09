@@ -1,0 +1,15 @@
+# Feature artifacts and local evidence
+features/**/data/
+features/**/*.xlsx
+features/**/*.png
+features/**/*.jpg
+features/**/*.postman_collection.json
+features/**/*environment.json
+
+# Build/editor output
+node_modules/
+bin/
+obj/
+target/
+dist/
+.DS_Store

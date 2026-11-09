@@ -1,0 +1,316 @@
+{
+	"info": {
+		"_postman_id": "8b9e67d2-4411-4a7b-a2c6-112000009466",
+		"name": "CBCLOUDV2-9466 - Thông Điệp 112 (CQT từ chối tiếp nhận)",
+		"description": "Bộ API Postman kiểm thử tiếp nhận và xử lý thông điệp 112 (Thông báo về việc NNT hủy tờ khai/thông báo/đề nghị) từ Tổng cục Thuế trên dịch vụ etran-teanant-service.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "1. Xử lý thông điệp 112 - API Chuyên dụng (/api/thong-diep-112)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Xử lý thành công - Trạng thái tờ khai = 4\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.success).to.eql(true);",
+							"    pm.expect(jsonData.status).to.eql(\"SUCCESS\");",
+							"    pm.expect(jsonData.mltDiep).to.eql(\"112\");",
+							"    pm.expect(jsonData.thop).to.eql(\"4\");",
+							"    if (jsonData.serviceTaxStatus !== undefined) {",
+							"        pm.expect(jsonData.serviceTaxStatus).to.eql(4);",
+							"    }",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n<TDiep>\n    <TTChung>\n        <PBan>2.0.0</PBan>\n        <MNGui>TCT</MNGui>\n        <MNNhan>V{{mst}}</MNNhan>\n        <MLTDiep>112</MLTDiep>\n        <MTDiep>TCT1AE4E7665E0845A1B0685361F059258B</MTDiep>\n        <MTDTChieu>{{mtdtChieu}}</MTDTChieu>\n        <MST>{{mst}}</MST>\n        <SLuong>1</SLuong>\n    </TTChung>\n    <DLieu>\n        <TBao>\n            <DLTBao Id=\"Id-EF8F3CADB15C4BAEA5FF1E36140147B4\">\n                <PBan>2.0.1</PBan>\n                <MSo>01/TB-TNĐT</MSo>\n                <Ten>Thông báo về việc NNT hủy tờ khai/thông báo/đề nghị</Ten>\n                <So>10113230000000293/TB-HĐĐT</So>\n                <DDanh>Hà Nội</DDanh>\n                <NTBao>2026-09-16</NTBao>\n                <MST>{{mst}}</MST>\n                <TNNT>CYBERLOTUS - KIỂM THỬ HĐĐT KHÔNG MÃ</TNNT>\n                <TTKhai>Tờ khai đăng ký/thay đổi thông tin sử dụng hóa đơn điện tử</TTKhai>\n                <MGDDTu>V01052320933CF323577BC5479E9FC14C3711E37F6D</MGDDTu>\n                <TGGui>2026-09-16T14:14:44</TGGui>\n                <THop>4</THop>\n                <TGNhan>2026-09-16T14:14:44</TGNhan>\n            </DLTBao>\n        </TBao>\n    </DLieu>\n</TDiep>"
+				},
+				"url": {
+					"raw": "{{base_url}}/api/thong-diep-112",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"thong-diep-112"
+					]
+				},
+				"description": "Gửi XML thông điệp 112 trực tiếp đến endpoint chuyên dụng, trả về JSON chi tiết trạng thái xử lý."
+			},
+			"response": []
+		},
+		{
+			"name": "2. Xử lý thông điệp 112 - Alias Endpoint (/api/td112)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Xử lý thành công\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.success).to.eql(true);",
+							"    pm.expect(jsonData.status).to.eql(\"SUCCESS\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n<TDiep>\n    <TTChung>\n        <PBan>2.0.0</PBan>\n        <MNGui>TCT</MNGui>\n        <MNNhan>V{{mst}}</MNNhan>\n        <MLTDiep>112</MLTDiep>\n        <MTDiep>TCT1AE4E7665E0845A1B0685361F059258B</MTDiep>\n        <MTDTChieu>{{mtdtChieu}}</MTDTChieu>\n        <MST>{{mst}}</MST>\n        <SLuong>1</SLuong>\n    </TTChung>\n    <DLieu>\n        <TBao>\n            <DLTBao Id=\"Id-EF8F3CADB15C4BAEA5FF1E36140147B4\">\n                <PBan>2.0.1</PBan>\n                <MSo>01/TB-TNĐT</MSo>\n                <Ten>Thông báo về việc NNT hủy tờ khai/thông báo/đề nghị</Ten>\n                <So>10113230000000293/TB-HĐĐT</So>\n                <DDanh>Hà Nội</DDanh>\n                <NTBao>2026-09-16</NTBao>\n                <MST>{{mst}}</MST>\n                <TNNT>CYBERLOTUS - KIỂM THỬ HĐĐT KHÔNG MÃ</TNNT>\n                <TTKhai>Tờ khai đăng ký/thay đổi thông tin sử dụng hóa đơn điện tử</TTKhai>\n                <MGDDTu>V01052320933CF323577BC5479E9FC14C3711E37F6D</MGDDTu>\n                <TGGui>2026-09-16T14:14:44</TGGui>\n                <THop>4</THop>\n                <TGNhan>2026-09-16T14:14:44</TGNhan>\n            </DLTBao>\n        </TBao>\n    </DLieu>\n</TDiep>"
+				},
+				"url": {
+					"raw": "{{base_url}}/api/td112",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"td112"
+					]
+				},
+				"description": "Gọi qua alias ngắn gọn /api/td112."
+			},
+			"response": []
+		},
+		{
+			"name": "3. Xử lý thông điệp 112 - Task Endpoint (/api/test/cbcloudv2-9466/td112)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Kiểm tra mã task CBCLOUDV2-9466\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.task).to.eql(\"CBCLOUDV2-9466\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n<TDiep>\n    <TTChung>\n        <PBan>2.0.0</PBan>\n        <MNGui>TCT</MNGui>\n        <MNNhan>V{{mst}}</MNNhan>\n        <MLTDiep>112</MLTDiep>\n        <MTDiep>TCT1AE4E7665E0845A1B0685361F059258B</MTDiep>\n        <MTDTChieu>{{mtdtChieu}}</MTDTChieu>\n        <MST>{{mst}}</MST>\n        <SLuong>1</SLuong>\n    </TTChung>\n    <DLieu>\n        <TBao>\n            <DLTBao Id=\"Id-EF8F3CADB15C4BAEA5FF1E36140147B4\">\n                <PBan>2.0.1</PBan>\n                <MSo>01/TB-TNĐT</MSo>\n                <Ten>Thông báo về việc NNT hủy tờ khai/thông báo/đề nghị</Ten>\n                <So>10113230000000293/TB-HĐĐT</So>\n                <DDanh>Hà Nội</DDanh>\n                <NTBao>2026-09-16</NTBao>\n                <MST>{{mst}}</MST>\n                <TNNT>CYBERLOTUS - KIỂM THỬ HĐĐT KHÔNG MÃ</TNNT>\n                <TTKhai>Tờ khai đăng ký/thay đổi thông tin sử dụng hóa đơn điện tử</TTKhai>\n                <MGDDTu>V01052320933CF323577BC5479E9FC14C3711E37F6D</MGDDTu>\n                <TGGui>2026-09-16T14:14:44</TGGui>\n                <THop>4</THop>\n                <TGNhan>2026-09-16T14:14:44</TGNhan>\n            </DLTBao>\n        </TBao>\n    </DLieu>\n</TDiep>"
+				},
+				"url": {
+					"raw": "{{base_url}}/api/test/cbcloudv2-9466/td112",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"test",
+						"cbcloudv2-9466",
+						"td112"
+					]
+				},
+				"description": "Gọi qua endpoint gắn với mã task CBCLOUDV2-9466."
+			},
+			"response": []
+		},
+		{
+			"name": "4. Xử lý thông điệp 112 - Dùng XML Mặc định (Empty Body)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Kiểm tra tự động gán dữ liệu mẫu khi body rỗng\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.mltDiep).to.eql(\"112\");",
+							"    pm.expect(jsonData.mst).to.eql(\"0105232093-998\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{base_url}}/api/thong-diep-112",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"thong-diep-112"
+					]
+				},
+				"description": "Không cần truyền body XML, API tự động sử dụng XML thông điệp 112 chuẩn để test nhanh."
+			},
+			"response": []
+		},
+		{
+			"name": "5. Gửi thông điệp 112 qua Kafka Topic (/api/test-xml)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Kafka Producer trả về OK\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    pm.expect(pm.response.text()).to.eql(\"OK\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/plain",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n<TDiep>\n    <TTChung>\n        <PBan>2.0.0</PBan>\n        <MNGui>TCT</MNGui>\n        <MNNhan>V{{mst}}</MNNhan>\n        <MLTDiep>112</MLTDiep>\n        <MTDiep>TCT1AE4E7665E0845A1B0685361F059258B</MTDiep>\n        <MTDTChieu>{{mtdtChieu}}</MTDTChieu>\n        <MST>{{mst}}</MST>\n        <SLuong>1</SLuong>\n    </TTChung>\n    <DLieu>\n        <TBao>\n            <DLTBao Id=\"Id-EF8F3CADB15C4BAEA5FF1E36140147B4\">\n                <PBan>2.0.1</PBan>\n                <MSo>01/TB-TNĐT</MSo>\n                <Ten>Thông báo về việc NNT hủy tờ khai/thông báo/đề nghị</Ten>\n                <So>10113230000000293/TB-HĐĐT</So>\n                <DDanh>Hà Nội</DDanh>\n                <NTBao>2026-09-16</NTBao>\n                <MST>{{mst}}</MST>\n                <TNNT>CYBERLOTUS - KIỂM THỬ HĐĐT KHÔNG MÃ</TNNT>\n                <TTKhai>Tờ khai đăng ký/thay đổi thông tin sử dụng hóa đơn điện tử</TTKhai>\n                <MGDDTu>V01052320933CF323577BC5479E9FC14C3711E37F6D</MGDDTu>\n                <TGGui>2026-09-16T14:14:44</TGGui>\n                <THop>4</THop>\n                <TGNhan>2026-09-16T14:14:44</TGNhan>\n            </DLTBao>\n        </TBao>\n    </DLieu>\n</TDiep>"
+				},
+				"url": {
+					"raw": "{{base_url}}/api/test-xml",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"test-xml"
+					]
+				},
+				"description": "Bắn trực tiếp thông điệp vào Kafka Topic để kiểm tra luồng nhận bất đồng bộ từ KafkaListener -> MultiPartitionMessageConsumer -> ProcessService -> ThongDiep112Service."
+			},
+			"response": []
+		},
+		{
+			"name": "6. Test Case Lỗi - Sai mã loại thông điệp (!= 112)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400 Bad Request\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});",
+							"",
+							"pm.test(\"Thông báo lỗi đúng nghiệp vụ\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.success).to.eql(false);",
+							"    pm.expect(jsonData.status).to.eql(\"FAILED\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n<TDiep>\n    <TTChung>\n        <PBan>2.0.0</PBan>\n        <MNGui>TCT</MNGui>\n        <MNNhan>V{{mst}}</MNNhan>\n        <MLTDiep>999</MLTDiep>\n        <MTDiep>TCT1AE4E7665E0845A1B0685361F059258B</MTDiep>\n        <MTDTChieu>{{mtdtChieu}}</MTDTChieu>\n        <MST>{{mst}}</MST>\n        <SLuong>1</SLuong>\n    </TTChung>\n    <DLieu></DLieu>\n</TDiep>"
+				},
+				"url": {
+					"raw": "{{base_url}}/api/thong-diep-112",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"thong-diep-112"
+					]
+				},
+				"description": "Kiểm tra phản hồi khi XML truyền vào không phải là thông điệp 112."
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8080",
+			"type": "string"
+		},
+		{
+			"key": "mst",
+			"value": "0105232093-998",
+			"type": "string"
+		},
+		{
+			"key": "mtdtChieu",
+			"value": "V0105232093-9983CF323577BC5479E9FC14C3711E37F6D",
+			"type": "string"
+		}
+	]
+}
