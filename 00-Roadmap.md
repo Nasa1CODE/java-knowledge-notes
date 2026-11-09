@@ -32,10 +32,10 @@
 - [ ] [[Hibernate-Session]] — Phiên làm việc Hibernate, so sánh với `HttpSession`.
 - [ ] [[Persistence-Context]] — Vòng đời Entity: *Transient*, *Managed*, *Detached*, *Removed*.
 - [ ] [[First-Level-Cache]] — Bộ nhớ đệm cấp 1 hoạt động trong phạm vi Session ra sao?
-- [ ] [[Dirty-Checking]] — Cơ chế tự động phát hiện thay đổi và snapshot.
+- [x] [[05-Hibernate/Dirty-Checking|Dirty-Checking]] — Cơ chế tự động phát hiện thay đổi và snapshot (đã áp dụng trong `ProductService.updatePrice()`).
 - [ ] [[Transaction-ACID]] — 4 thuộc tính ACID, vai trò của Write-Ahead Logging (WAL).
 - [ ] [[Isolation-Levels]] — Read Uncommitted, Read Committed, Repeatable Read, Serializable; các hiện tượng Dirty Read, Non-repeatable Read, Phantom Read.
-- [ ] [[N-Plus-One-Problem]] — N+1 query là gì? Cách giải quyết: `JOIN FETCH`, `@EntityGraph`, Batch size.
+- [x] [[05-Hibernate/N-Plus-One-Problem|N-Plus-One-Problem]] — N+1 query là gì? Cách giải quyết: `@EntityGraph` (đã áp dụng trong `ProductRepository.findAllByIsDeletedFalse()`), `JOIN FETCH`, Batch size.
 
 ### Tuần 6 - 7: Spring Boot Internals
 - [ ] [[IoC-and-DI]] — Đảo ngược điều khiển (IoC) và Tiêm phụ thuộc (Dependency Injection), Spring ApplicationContext.
