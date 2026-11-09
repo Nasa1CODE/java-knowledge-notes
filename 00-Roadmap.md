@@ -26,7 +26,7 @@
 ### Tuần 3: Concurrency & Java 21+ Modern Features
 - [x] [[03-Concurrency/Virtual-Threads|Virtual-Threads]] — Project Loom, Platform Thread vs Virtual Thread, Race Condition, AtomicInteger, Stateless design.
 - [x] [[03-Concurrency/Locks-and-Synchronized|Locks-and-Synchronized]] — Race Condition thực tế (BankAccount), synchronized method/block, ReentrantLock, ReadWriteLock, Deadlock.
-- [ ] [[CompletableFuture]] — Lập trình bất đồng bộ không chặn (Non-blocking).
+- [x] [[03-Concurrency/CompletableFuture|CompletableFuture]] — supplyAsync, allOf/anyOf, thenApply/thenCompose, exceptionally, custom ThreadPool, refactor DashboardService thực tế.
 
 ### Tuần 4 - 5: Hibernate & Database Deep-dive (Trọng tâm Backend)
 - [ ] [[Hibernate-Session]] — Phiên làm việc Hibernate, so sánh với `HttpSession`.
